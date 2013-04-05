@@ -9,5 +9,5 @@ notifications:
     on_failure: never
 branches:
   only:
-    - master
+    - source
  
