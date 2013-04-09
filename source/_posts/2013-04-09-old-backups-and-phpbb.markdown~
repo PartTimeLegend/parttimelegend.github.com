@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Old backups and phpBB"
+date: 2013-04-09 01:04
+comments: true
+categories: php, development, backups, repositories
+---
+
+So I was doing some **spring** cleaning and I came accross a CD that had come with me when I moved. It wasn't labelled so I decided to check it out.
+
+It had a load of files related to back when I used to develop hacks/MODs for [phpBB](http://www.phpbb.com).
+
+I've no idea where else on the internet you might find them, so I decided to deploy them to some new repositories on [Github](http://www.github.com).
+
+## phpBB and I
+
+I left the phpBB community about 10 years ago. I have my reasons, and I will not go into further discussion on the matter. This code will not be maintained or supported. If you want it, have it. If you fork it, I will not accept pulls. Count this as a storage of old code. If any others show up I'll submit them. It's been so long since I used phpBB I doubt I even remember any of it.
