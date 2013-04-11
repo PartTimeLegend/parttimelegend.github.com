@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Finally got Travis CI to work with C#.NET"
+date: 2013-04-11 06:06
+comments: true
+categories: development, csharp, dotnet
+---
+
+```
+language: c
+
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+
+script:
+  - xbuild MarkdownSharp.sln
+```
+
+[![Build Status](https://travis-ci.org/PartTimeLegend/PseudonymMatching.png?branch=master)](https://travis-ci.org/PartTimeLegend/PseudonymMatching)
