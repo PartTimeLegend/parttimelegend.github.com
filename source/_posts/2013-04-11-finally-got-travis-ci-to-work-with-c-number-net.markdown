@@ -33,7 +33,7 @@ Now we simply call xbuild and pass in the solution.
 
 ```
 script:
-  - xbuild MarkdownSharp.sln
+  - xbuild PseudonoymMatching.sln
 ```
 
 Does it work? Check it out for yourself.
