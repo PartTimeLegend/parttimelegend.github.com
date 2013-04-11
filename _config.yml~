@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://PartTimeLegend.github.com
+url: http://www.parttimelegend.co.uk
 title: Antony Bailey The PartTimeLegend
 subtitle: I'll put something here soon
 author: Antony Bailey
@@ -96,3 +96,6 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: true
+
+# Bitcoin Donations
+bitcoin: 13BrFJVFX6ao7LtzqR92vgYeMBC3va6pe8

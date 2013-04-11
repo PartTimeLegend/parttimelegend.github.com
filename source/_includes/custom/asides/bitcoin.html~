@@ -1,0 +1,3 @@
+<section>
+<h1>Bitcoin</h1>
+<a href="bitcoin:{{ site.bitcoin }}"><img src="http://blockchain.info/qr?data={{ site.bitcoin }}=200" alt="Bitcoin"></a></section>
