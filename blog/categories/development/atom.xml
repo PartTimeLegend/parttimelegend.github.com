@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: development | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/development/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rebase Github fork]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/13/rebase-github-fork/"/>
+    <updated>2013-04-13T15:16:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/13/rebase-github-fork</id>
+    <content type="html"><![CDATA[<p>So you are playing around with <a href="https://www.github.com">Github</a> and you forked a repo. Good for you! Only the original author updated their repo and you need to rebase your fork to get the new commits.</p>
+
+<p>Just do the following steps and you're done.</p>
+
+<p><code>
+git clone https://github.com/youruser/reponame.git
+</code></p>
+
+<p><code>
+cd reponame
+</code></p>
+
+<p><code>
+git remote add upstream https://github.com/sourceuser/reponame.git
+</code></p>
+
+<p><code>
+git fetch upstream
+</code></p>
+
+<p><code>
+git rebase upstream/master
+</code></p>
+
+<p><code>
+git push -f origin master
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

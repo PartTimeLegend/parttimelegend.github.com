@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PGP Key Signing Service]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/24/pgp-key-signing-service/"/>
+    <updated>2013-04-24T22:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/24/pgp-key-signing-service</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I built a PGP Key Server on my Raspberry Pi]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/16/i-built-a-pgp-key-server-on-my-raspberry-pi/"/>
+    <updated>2013-04-16T06:46:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/16/i-built-a-pgp-key-server-on-my-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I have a <a href="http://www.raspberrypi.org/">Raspberry Pi</a> which I like to toy with. I have another one that runs <a href="http://www.raspbmc.com/">Rasbmc</a>, but that&#8217;s just for watching movies on.</p>
+
+<p>Well I was updating my public key records for PGP/GPG and it occured to me that I should be able to run a small key server myself.</p>
+
+<p>I have <a href="http://www.raspbian.org/">Raspbian</a> on my Pi which is a <a href="http://debian.org">Debian</a> based distro. Therefore it has the vast majority of the repositories that standard Debian has available to it.</p>
+
+<p>First think I did was setup <a href="http://www.no-ip.org">no-ip</a> because my ISP doesn&#8217;t provide static IPs to residential customers.</p>
+
+<p>So from my laptop I start with these commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh pi@x.x.x.x</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Replace <code>x.x.x.x</code> with your Pi&#8217;s IP. Provide the password to login default is <code>raspberry</code>.</p>
+
+<p>Now download and install No-IP.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+</span><span class='line'>tar xf noip-duc-linux.tar.gz
+</span><span class='line'>cd noip-2.1.9-1/
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will be prompted to put the login details for your account at No-IP. You will be asked how often to update, I sugest 360 which is 1 hour.</p>
+
+<p>Now we need to set No-IP to run at boot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nano /etc/rc.local</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simply add the following line and close and save.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/usr/local/bin/noip2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have a host we can use and we are ready for the main event.</p>
+
+<p>As SKS is in your base repositories you can use.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apt-get install sks</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now build the database.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sks build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you need to get SKS to run at boot also.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo nano /etc/default/sks</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Find the line.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>initstart=no</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Change it to.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>initstart=yes</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go. You have now got an SKS server running on your machine.</p>
+
+<p>If you are looking for the web front end, then you can use the files from <a href="https://syslog.tv">syslog.tv</a>.</p>
+
+<p>Create your directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mkdir -p /var/lib/sks/www/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now copy the index file to it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://syslog.tv/downloads/sks-index.html -O /var/lib/sks/www/index.html --no-check-certificate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go. All setup and running.</p>
+
+<p>You can sometimes access my key server <a href="http://antonybailey.no-ip.org:11371/">here</a>. Though I will probably give up and do something else in a week.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Migrate gh-pages to own repository]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/16/migrate-gh-pages-to-own-repository/"/>
+    <updated>2013-04-16T00:29:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/16/migrate-gh-pages-to-own-repository</id>
+    <content type="html"><![CDATA[<p>After joining the <a href="https://github.com/buttercoin">Buttercoin</a> development team, I was asked to move the <code>gh-pages</code> to it&#8217;s own repository.</p>
+
+<p>Whilst this is a really simple thing to do, it surprised me the lack of clear documentation on how to do this.</p>
+
+<p>Go like this.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone -b gh-pages https://github.com/yourname/reponame.git temp</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd temp</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote rm origin</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add upstream https://github.com/yourname/newrepo.git</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git branch -m gh-pages master</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now delete the <code>gh-pages</code> branch from your repository.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rebase Github fork]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/13/rebase-github-fork/"/>
+    <updated>2013-04-13T15:16:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/13/rebase-github-fork</id>
+    <content type="html"><![CDATA[<p>So you are playing around with <a href="https://www.github.com">Github</a> and you forked a repo. Good for you! Only the original author updated their repo and you need to rebase your fork to get the new commits.</p>
+
+<p>Just do the following steps and you&#8217;re done.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/youruser/reponame.git</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd reponame</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add upstream https://github.com/sourceuser/reponame.git</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git fetch upstream</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git rebase upstream/master</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git push -f origin master</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Justice for Aaron Swartz]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/12/justice-for-aaron-swartz/"/>
+    <updated>2013-04-12T06:39:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/12/justice-for-aaron-swartz</id>
+    <content type="html"><![CDATA[<blockquote><p><table>
+<tr>
+<td>
+<a href="http://www.fixthecfaa.com"><img src="http://PartTimeLegend.github.com//dihq71mhvy8o7.cloudfront.net/images/justice-for-aaron.jpg" /></a>
+</td>
+<td>
+The Computer Fraud and Abuse Act is the law under which Aaron Swartz and other innovators and activists have been threatened with decades in prison. The CFAA is so broad that law enforcement says it criminalizes all sorts of mundane Internet use: Potentially even breaking a website&#8217;s fine print terms of service agreement. Don&#8217;t set up a Myspace page for your cat. Don&#8217;t fudge your height on a dating site. Don&#8217;t share your Facebook password with anybody: You could be committing a federal crime.
+</td>
+</tr>
+</table></p></blockquote>
+
+<p>I don&#8217;t live in the USA, however I massively support this. If you are in the USA please enter your details.</p>
+
+<p>You ill see a modal overlay on this site when you first visit that will promote this. Just do it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bitcoin Price Crash and Suicides]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/12/bitcoin-price-crash-and-suicides/"/>
+    <updated>2013-04-12T06:27:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/12/bitcoin-price-crash-and-suicides</id>
+    <content type="html"><![CDATA[<p>So I have seen a lot in the last day or so about the bubble popping.</p>
+
+<p>After unceremoniously <a href="http://www.reddit.com/r/Bitcoin/comments/1c2r87/im_sorry_but_i_can_take_no_more/">rage quitting</a> <a href="http://www.reddit.com/r/bitcoin">/r/bitcoin</a> after it became more like <a href="http://www.reddit.com/r/circlejerk">/r/circlejerk</a> I was not aware of Today&#8217;s pointless posts.</p>
+
+<p>I was on IRC and I was told about <a href="http://www.reddit.com/r/Bitcoin/comments/1c51ck/i_think_this_subreddit_should_seriously_consider/">this post</a> and I had to read twice to see if anyone was actually serious.</p>
+
+<blockquote><h3>I think this subreddit should seriously consider having suicide hotline info posted.</h3>
+
+<p>Im not joking. This is not a troll. We know there have been countless pie in the sky &#8220;investors&#8221; in BTC over the past couple of days. Shit Ive read more than one comment about how we&#8217;ve got college kids taking STUDENT LOANS to buy bitcoin when it was at 150+. There is no way more than one person wont kill themselves over this. Might as well make the info known to maybe save a life or two.
+I know this will get downvoted into oblivion by the bitcoin religious nuts who think this currency will change the world - because they fear it will only make BTC look bad or make it lose value - tough shit.</p></blockquote>
+
+<p>I was amazed to see how many people had invested more money than they could lose into Bitcoin. I have personally not bought a single coin, nor have I sold one. My current holdings are not tiny and not large.</p>
+
+<p>It just shocks me when people see a highly unstable commodity (Is Bitcoin a currency or a commodity?) and they truly believe the price can only go up. Do we forget about every single economic crash is history?</p>
+
+<p>I&#8217;m sure we will see a few news articles over the coming days. Let&#8217;s see how much people have lost.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Finally got Travis CI to work with C#.NET]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/11/finally-got-travis-ci-to-work-with-c-number-net/"/>
+    <updated>2013-04-11T06:06:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/11/finally-got-travis-ci-to-work-with-c-number-net</id>
+    <content type="html"><![CDATA[<p>I have been playing with <a href="http://www.travis-ci.org">Travis CI</a> for a little while as I see the amazing advantage of using CI. One of the downsides I saw was the lack of .NET development testing.</p>
+
+<p>Well I fixed that! Well, okay&#8230; sort of.</p>
+
+<p>We need to do a few things to make it work, that are a bit tough to do to start with.</p>
+
+<p>First the language. I would love to see the option for C# in the future, but for now we will just say it&#8217;s C.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we need to install <a href="http://mono-project.com/Main_Page">Mono</a> which is described on their own site as:</p>
+
+<blockquote><p>&#8220;Mono is a software platform designed to allow developers to easily create cross platform applications. Sponsored by Xamarin, Mono is an open source implementation of Microsoft&#8217;s .NET Framework based on the ECMA standards for C# and the Common Language Runtime. A growing family of solutions and an active and enthusiastic contributing community is helping position Mono to become the leading choice for development of Linux applications.&#8221;</p></blockquote>
+
+<p>Obviously it&#8217;s not as complete as Microsoft&#8217;s, but it&#8217;s good enough for me.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>install:
+</span><span class='line'>  - sudo apt-get install mono-devel mono-gmcs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we simply call xbuild and pass in the solution.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script:
+</span><span class='line'>  - xbuild PseudonoymMatching.sln</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Does it work? Check it out for yourself.</p>
+
+<p><a href="https://travis-ci.org/PartTimeLegend/PseudonymMatching"><img src="https://travis-ci.org/PartTimeLegend/PseudonymMatching.png?branch=master" alt="Build Status" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bitcoin Mining Without Your Own Mining Rig or ASIC]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/09/bitcoin-mining-without-your-own-mining-rig-or-asic/"/>
+    <updated>2013-04-09T06:16:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/09/bitcoin-mining-without-your-own-mining-rig-or-asic</id>
+    <content type="html"><![CDATA[<h2>What is Bitcoin?</h2>
+
+<blockquote><p>Bitcoin is a new kind of money. It&#8217;s the first decentralized electronic currency not controlled by a single organization or government. It&#8217;s an open source project, and it is used by more than 100,000 people. All over the world people are trading hundreds of thousands of dollars worth of bitcoin every day with no middle man and no credit card companies. It&#8217;s a startup currency which has never happened before.</p>
+
+<p>Bitcoin is the first digital currency that is completely distributed. The network is made up of users like yourself so no bank or payment processor is required between you and whoever you&#8217;re trading with. This decentralization is the basis for Bitcoin&#8217;s security and freedom.</p>
+
+<p>Email let us send letters for free, anywhere in the world. Skype lets us make phone and video calls for free, anywhere in the world. Now there&#8217;s bitcoin. Bitcoin lets you send money to anyone online, anywhere in the world for less than a cent per transaction! Bitcoin is a community run system not controlled by any bank or government. There&#8217;s no wallstreet banker getting rich by standing between you and the people you want to send and receive money from.</p>
+
+<p>Bitcoin is more efficient than all competing currencies. This will drive its adoption in the same way computers were adopted, in that computers made people more efficient in competing in the marketplace. A currency has value by it being widely used. Bitcoin is a startup currency with a deflationary bootstrapping economy. Its use spreads by providing the speculator incentive.</p>
+
+<p>Bitcoin is going to be the biggest opportunity for innovation that the world has seen since the industrial revolution. An idea whose time has come. - <a href="https://www.weusecoins.com/en/questions">We Use Coins</a></p></blockquote>
+
+<p>Now that&#8217;s out of the way, let&#8217;s move on.</p>
+
+<h2>Bitcoin Mining</h2>
+
+<p>Back in the early days you could mine Bitcoin on your CPU as a small time operation. They were pretty worthless, so not many people jumped on. Then the value grew and people wanted more and more, so they invested in bigger setups and the power needed to mine grew and grew. Now we have people producing specialised hardward (<a href="http://en.wikipedia.org/wiki/Application-specific_integrated_circuit">ASIC</a>).</p>
+
+<p>Well I have moved all my mining operations from my home mining rigs over to <a href="http://www.pyramining.com/referral/xz4nk3r2d">Pyramining</a>.</p>
+
+<h3>Why have I done this?</h3>
+
+<p>Because the price tag for mining is just <a href="http://www.youtube.com/watch?v=x4o-TeMHys0">too damn high</a>! Also Butterfly Labs is a scam and will never deliver!</p>
+
+<h3>How does it work?</h3>
+
+<p>It&#8217;s pretty simple. You <a href="http://www.pyramining.com/referral/46zmgqdhy">register</a> and enter the address you want them to pay you to. They then give you an address to send Bitcoin to. They use your bitcoin to buy mining equipment and mine on your behalf.</p>
+
+<p>They obviously get to keep the hardware when your time runs out and they can use this to fund themselves. So it&#8217;s win-win if you ask me. No more stupidly high electricity bills and noise of mining rigs running.</p>
+
+<h5>Disclosure</h5>
+
+<p>Pyramining requires you have a referrer to sign up. They do not allow you to register without one. The links I have included in this post are with my referal link and I will gain a small fee for you signing up.</p>
+
+<p>If you don&#8217;t believe me, you are welcome to visit <a href="http://www.pyramining.com">Pyramining</a> without the referal link.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Old backups and phpBB]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/09/old-backups-and-phpbb/"/>
+    <updated>2013-04-09T01:04:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/09/old-backups-and-phpbb</id>
+    <content type="html"><![CDATA[<p>So I was doing some <em>spring</em> cleaning and I came accross a CD that had come with me when I moved. It wasn&#8217;t labelled so I decided to check it out.</p>
+
+<p>It had a load of files related to back when I used to develop hacks/MODs for <a href="http://www.phpbb.com">phpBB</a>.</p>
+
+<p>I&#8217;ve no idea where else on the internet you might find them, so I decided to deploy them to some new repositories on <a href="http://www.github.com">Github</a>.</p>
+
+<h2>phpBB and I</h2>
+
+<p>I left the phpBB community about 10 years ago. I have my reasons, and I will not go into further discussion on the matter. This code will not be maintained or supported. If you want it, have it. If you fork it, I will <strong>NOT</strong>* accept pulls. Count this as a storage of old code. If any others show up I&#8217;ll submit them. It&#8217;s been so long since I used phpBB I doubt I even remember any of it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bitcoin Mining on Raspberry Pi]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/08/bitcoin-mining-on-raspberry-pi/"/>
+    <updated>2013-04-08T00:01:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/08/bitcoin-mining-on-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I put this guide together a while ago and I decided to publish my gists here. So here you go.</p>
+
+<div><script src='https://gist.github.com/5170990.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Virtual Box on Ubuntu : File not found fix]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/07/installing-virtual-box-on-ubuntu-file-not-found-fix/"/>
+    <updated>2013-04-07T23:53:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/07/installing-virtual-box-on-ubuntu-file-not-found-fix</id>
+    <content type="html"><![CDATA[<p>I love Linux, I always have. It just makes me feel more in control, even if I have no idea what I&#8217;m doing.</p>
+
+<p>Unfortunately every now and then I need to use Windows. Well, I don&#8217;t see the need for a dual boot when I can just use <a href="https://www.virtualbox.org/">Virtual Box</a> and install the Windows XP/7/8 disks I have on a bookshelf.</p>
+
+<p>Well I recently installed <a href="http://http://www.ubuntu.com/">Ubuntu</a> on my laptop. I have used several distros over the years and I always liked <a href="http://www.debian.org/">Debian</a>. So I decided to use the fork that is meant to be easier to use (was Debian hard?).</p>
+
+<p>Anyway I digress.</p>
+
+<div><script src='https://gist.github.com/5328700.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Travis CI and how I both love and hate you]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/05/travis-ci-and-how-i-both-love-and-hate-you/"/>
+    <updated>2013-04-05T20:50:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/05/travis-ci-and-how-i-both-love-and-hate-you</id>
+    <content type="html"><![CDATA[<p>After recently rediscovering my love of <a href="http://www.github.com/parttimelegend">Github</a> I was interested to see some of the additional functionality.</p>
+
+<p>You see I have long had a background of developing Open Source software. I haven&#8217;t in recent years as I have had more interest in making money rather than making the world a better place. Well now I feel I have skills to offer the Open Source community as well as learning new skills.</p>
+
+<p>I love the idea of Continuos Integration and I wished it was easier to support and implement. I develop in several languages, and I have recently decided to learn Ruby as a something to do project.</p>
+
+<p>I had seen systems such as <a href="http://jenkins-ci.org/">Jenkins CI</a>, but the fact that I needed an additional server of my own to use it limited me from real useage for real time CI.</p>
+
+<p>I then came to find <a href="https://travis-ci.org/">Travis CI</a>! It seemed simple enough to setup, just sign in and activate for your project.</p>
+
+<p>Then came the hard part, the <code>.travis.yml</code> file! Oh I understand the need for it, don&#8217;t get me wrong. I just wish it was easier to figure out the real options.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: ruby
+</span><span class='line'>rvm:
+</span><span class='line'>  - 1.9.3
+</span><span class='line'>  - jruby-18mode # JRuby in 1.8 mode
+</span><span class='line'>  - jruby-19mode # JRuby in 1.9 mode
+</span><span class='line'>  - rbx-18mode
+</span><span class='line'>  - rbx-19mode
+</span><span class='line'>  - 1.8.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well that looks simple enough. Let&#8217;s go! Oh wait, it&#8217;s more than that.</p>
+
+<p>Well it decides it will run <code>bundle install</code> which is fine by me, then it runs &#8216;rake install&#8217;. Wait a second! I&#8217;m not using rake! So it fails as I have no <code>Rakefile</code>. Surey there is a way around this. There is!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>script: bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now let&#8217;s move on to the way that Travis decides to email you constantly about the status of a build. I don&#8217;t like email. I really want a replacement for email, but what?</p>
+
+<p>First let&#8217;s disable the email alerts.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>notifications:
+</span><span class='line'>  email:
+</span><span class='line'>    on_success: never
+</span><span class='line'>    on_failure: never</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s better already, but I&#8217;m going to need you to alert me somehow. Preferably something I can automate. Let&#8217;s look back at one of the oldest uses of the internet IRC. I have an issue with IRC as it is always idle people or people trying to get into <a href="http://bash.org">QDB</a>. However for alerts it&#8217;s perfect!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>notifications:
+</span><span class='line'>  irc: "rowling.freenode.net#parttimelegend"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I can then have an application monitor and investigate failures. I can even set it to fix common ones if I wish.</p>
+
+<p>Then Travis is perfect! Well almost. The last fix for me is branches.
+If you&#8217;re like me, then some of your branches are broken. This is because they are development branches and I check code in a lot.
+So we want to tell Travis not to read certain branches, or more simply only to check certain branches.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>branches:
+</span><span class='line'>  only:
+</span><span class='line'>    - master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells Travis to only check the master branch. I&#8217;m going to assume this always builds, or at least it should. My only complaint is that master is checked first so can&#8217;t be excluded simply.
+Such as in the case of <a href="https://github.com/PartTimeLegend/parttimelegend.github.com">this blog</a>. In this case the master branch is not code, but the source branch is.
+I&#8217;ve not found a fix for this yet though. :(</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I installed octopress]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/05/i-installed-octopress/"/>
+    <updated>2013-04-05T04:46:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/05/i-installed-octopress</id>
+    <content type="html"><![CDATA[<p>Now to make it look pretty!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Easily Remove All Malware from your Windows PC]]></title>
+    <link href="http://PartTimeLegend.github.com/easily-remove-malware-windows-pc/"/>
+    <updated>2012-11-07T00:00:00+00:00</updated>
+    <id>http://PartTimeLegend.github.com/easily-remove-malware-windows-pc</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>One of the most common issues that people come to me for help with is the removal of <a href="http://en.wikipedia.org/wiki/Malware" title="Malware">malware</a> from their computers.</p>
+
+<p>English: I constructed this image using :image:Computer n screen.svg and :image:Toxic.png. (Photo credit: Wikipedia)</p>
+
+<p>The number of times this occurs has increased dramatically in the last few years, well I’ve decided to write-up a quick guide on how to remove the malware you have got.</p>
+
+<p>There are so many tools and programs on the internet that offer to remove malware from your computer, some are free and some are expensive. There is only one program you need to remove malware and it’s free!</p>
+
+<p><a href="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH"><img src="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH" alt=" Easily Remove All Malware from your Windows PC" /></a></p>
+
+<p> </p>
+
+<p>So now you have downloaded the only tool you need. Let’s begin removing your malware. If you are reading this post and looking to remove malware from your PC I would recommend printing it or loading it up on your tablet. Unless you have a great memory.</p>
+
+<h2>Step 1</h2>
+
+<p>Download and install <a href="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH">Malwarebytes Antimalware</a>.</p>
+
+<h2>Step 2</h2>
+
+<p>Reboot your computer into <a href="http://en.wikipedia.org/wiki/Safe_mode" title="Safe mode">Safe Mode</a>. You can do this by powering your computer down and pressing F8 during boot (Shift F8 / F20 in <a href="http://blogs.msdn.com/b/b8/" title="Windows 8">Windows 8</a>).</p>
+
+<h2>Step 3</h2>
+
+<p>Launch Malwarebytes Antimalware and let it update.</p>
+
+<h2>Step 4</h2>
+
+<p>Run a full scan.</p>
+
+<h2>Step 5</h2>
+
+<p>Remove infections.</p>
+
+<h2>Step 6</h2>
+
+<p>Reboot in Safe Mode.</p>
+
+<h2>Step 7</h2>
+
+<p>Repeat from Step 4.</p>
+
+<h2>Step 8</h2>
+
+<p>Reboot as normal.</p>
+
+<h2>Step 9</h2>
+
+<p>Run another full scan to be sure.</p>
+
+<p>There you go. All fixed.</p>
+
+<p>Editorial Note: The links to Malwarebytes are via an advertising provider and I earn a referral fee. I fully support Malwarebytes, and so you can also download direct from their website: http://www.malwarebytes.org/</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tablet Purchasing Options]]></title>
+    <link href="http://PartTimeLegend.github.com/tablet-purchasing/"/>
+    <updated>2012-10-30T00:00:00+00:00</updated>
+    <id>http://PartTimeLegend.github.com/tablet-purchasing</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>The consumer tablet market has seen some great advances over recent years. As such I have now made the decision to buy one of my own.</p>
+
+<p>I have to compare the options that are available and determine which to get. I’m going to run through a few tablets available so that people can give input.</p>
+
+<p>I’m going to start this off and admit that I am a “Fandroid”. That said, I will be considering non-Android options as I don’t want to completely disregard other options.</p>
+
+<p>So let’s start.</p>
+
+<h2><a href="http://www.apple.com/ipad/" title="iPad">iPad</a> x</h2>
+
+<p>I use the x to represent the latest version number available at the point of purchase. iOS is very well polished and designed for the ease of user interface. It is a closed platform, which means that you can only get apps from the <a href="http://www.apple.com/itunes" title="App Store (iOS)">Apple App Store</a>. While this is an issue for many, I must admit that even on Android I get the vast majority from the Google Play Market.</p>
+
+<p>The price is obviously significantly higher for an Apple produce as per the “Apple Tax” that means their products cost more for the brand name. I would be looking for a 3G version that I can fit a micro SIM that I purchase from Samba Mobile.</p>
+
+<p>I am disregarding the iPad mini as I want the larger size of tablet.</p>
+
+<p>Rating: 6/10</p>
+
+<h2><a href="http://www.amazon.com/kindlefire" title="Kindle Fire">Amazon Kindle Fire</a> HD</h2>
+
+<p>I must say this is an impressive tablet. I already have an <a href="http://www.amazon.com/Kindle-Wireless-Reader-Wifi-Graphite/dp/B002Y27P3M?SubscriptionId=0G81C5DAZ03ZR9WH9X82&amp;tag=myjungleshop-21&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B002Y27P3M" title="Kindle Wireless Reading Device, Wi-Fi, 6&quot; Display, Graphite - Latest Generation">Amazon Kindle</a> and I adore it for its reading options, whilst I once had to carry physical books that would bulk up my carrying weight. I can now start a new book once I finish my current even half way through my journey.</p>
+
+<p>The downside of the Kindle Fire HD is that it doesn’t have access to Google Play. I can probably work around this with the help of people from XDA-Developers, however I am unsure as to how simple this would be. Assuming I get it stock, I am unlikely to have full access to my Google Apps account (thepoliceoftheinter.net). This means that I would be missing crucial features I would want from a tablet and as such whilst it is an amazing piece of cheap hardware, I must reduce its points for functionality.</p>
+
+<p>Rating: 5/10</p>
+
+<h2><a href="http://www.microsoft.com/surface/" title="Microsoft Surface">Microsoft Surface</a></h2>
+
+<p>I have been waiting so long for Surface to become available, ever since I saw the very early designs several years ago. My biggest disappointment was that it has been made into a tablet! The early designs I saw it was designed as a multi user table and not a tablet. You could load up documents at your desk part and throw them to others around the table. I always imagined this would change the boardroom to get away from paper (Oh how I hate paper!). Alas, they have streamlined it and given it a smaller scope. I just want life to be like Minority Report.</p>
+
+<p>The tablet runs Windows 8 which I have been running on my own laptop for a few months now. While it is a little strange to get used to, I must admit I have begun to like it. I will be writing an article on this shortly.</p>
+
+<p>The thing that really attracts me to Surface is the detachable/attachable keyboard option. One of the issues with tablets is word processing. Adding a keyboard will make this a much improved option. I am very keen to try one of these out, but have yet to find a store with one in stock.</p>
+
+<p>Rating: 8/10</p>
+
+<h2>Google Nexus 7</h2>
+
+<blockquote><p>“I’ve seen things you people wouldn’t believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhauser gate. All those moments will be lost in time… like tears in rain… Time to die. ” – Batty</p></blockquote>
+
+<p>I couldn’t discuss this tablet without quoting from one of the greatest movies/books of all time. I have watched this movie too many times to count and I have read the book at least twice a feat not common for me and my almost eidetic memory.</p>
+
+<p>The tablet itself is Google branded, which means like other Nexus devices it is to receive the most up to date releases on Android as and when they are released by Google without a pause for network approval. This means that I will likely see “Key Lime Pie” or whatever they decide to call it before the mass market of other Android devices do. Whilst I can’t help be the kind of person who loves to see a version number go up, I must consider the options available to me and remember there are always alternative routes to get the latest version of any software.</p>
+
+<p>I have not seen a tablet supporting 3G however, and whilst <a href="http://en.wikipedia.org/wiki/Wi-Fi" title="Wi-Fi">WiFi</a> is available almost everywhere and I can tether to my Samsung Galaxy SIII. I must be honest and say I would prefer an independent internet connection.</p>
+
+<p>Rating: 7/10</p>
+
+<p>When I started writing this post I was really gunning for the Nexus 7 and now I have pretty much sold myself on Surface. I guess I have some more homework to do.</p>
+
+<p>What tablet do you have? What tablet do you wish you had?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Bitcoin The Easy Way]]></title>
+    <link href="http://PartTimeLegend.github.com/getting-bitcoin-the-easy-way/"/>
+    <updated>2012-10-11T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/getting-bitcoin-the-easy-way</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>So chances are that you are already aware of Bitcoin. If not, you should go read about it.</p>
+
+<p>There are several ways to generate coin, these are either through purchasing coin, referral systems and mining.</p>
+
+<h2>Mining</h2>
+
+<p>Back in the early days of Bitcoin, you could easily mine for currency. These days it’s not so simple as the chains get more complicated. Did you know? You’re mining coin right now! One of the revenue earning services of this site is Bitcoinplus which is operating on this site right now. The spare CPU cycles of your machine are being used to help fund the content you are reading.</p>
+
+<p>While mining will still work, it is likely not very cost effective. The power used to mine compared with the returns you get are drastically outweighed. There are people who build mining rigs, however I find that having distributed machines all running a small amount during their normal operation works just as well.</p>
+
+<h2>Referrals</h2>
+
+<p>There is not much to be gained via referrals for Bitcoin in my experience. The only reliable sites I’ve found to date have been Bitvisitor which pays you to visit a site for 5 minutes. The problem is that there is only a few sites available</p>
+
+<p>for viewing and you quickly get bored. <a href="http://www.iwantfreebitcoins.com/20673">I Want Free Bit Coins</a> which allows you to complete offers to earn bitcoin. It seems a bit spammy, but I’ve been paid by them.</p>
+
+<h2>Purchase</h2>
+
+<p>Now for the extreme need to get bitcoin in a hurry, you can buy it from various online markets. I won’t name any, but you can google to find them pretty easily.</p>
+
+<p>Remember if you are selling bitcoin, that it is completely anonymous and without the control of a chargeback so be sure you trust the buyer.</p>
+
+<p>I have been using Bitcoin for about 2 years now, and find it rather useful for retaining value.</p>
+
+<p>Oh and feel free to send me some free bitcoin: 13BrFJVFX6ao7LtzqR92vgYeMBC3va6pe8</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Apps You Can&#8217;t Live Without]]></title>
+    <link href="http://PartTimeLegend.github.com/android-apps-you-cant-live-without/"/>
+    <updated>2012-09-17T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/android-apps-you-cant-live-without</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>I have so many apps on my phone that I can’t live without. Some of them are every day apps and some are used on the odd occasion, but I just can’t be without them.</p>
+
+<p>Let’s start off with my favourites and see how we go.</p>
+
+<h2>Google Maps</h2>
+
+<p>You can’t have a smartphone without having GPS and Google Maps is my starting point for finding my way somewhere in a new city.</p>
+
+<p>I would be rather shocked if you don’t use it.</p>
+
+<h2>Facebook</h2>
+
+<p>The Social Network. You can’t really live in the modern world and not have a Facebook account. Love it or hate it, you need to use it to communicate with friends and know what’s going on in people’s lives. Even if they aren’t doing anything interesting. You are a media junkie and you can’t help yourself.</p>
+
+<h2>Whatsapp</h2>
+
+<p>We live in a world where messaging is instant and free. This is my favourite messaging app for my phone.</p>
+
+<h2>eBay</h2>
+
+<p>We all love eBay you can buy almost anything there. Sometimes you want to use it just to see what there is.</p>
+
+<p>You can place bids from the application and watch auctions.</p>
+
+<h2>TVCatchup</h2>
+
+<p>This is a new app for me. I am often out and about and don’t get chance to watch the TV shows I want to watch. This means I am able to watch them when I am out. It’s definitely a plus for me.</p>
+
+<h2>Chrome</h2>
+
+<p>Why use the Android stock browser when you can use Chrome? It will sync all your data via Chrome Sync.</p>
+
+<p>If you could add Chrome Extensions then it would be absolutely perfect.</p>
+
+<h2>Amazon</h2>
+
+<p>How do you survive without Amazon? I live to shop here. The barcode scanner is amazing, as I can scan in store and then buy here cheaper. I also do a lot of market research work for amazon vouchers.</p>
+
+<h2>SoundHound</h2>
+
+<p>I love listening to music. I can’t get enough of music, and when I’m out I often hear a song and think I want to know who it is. Hold up SoundHound for a few seconds and you know!</p>
+
+<h2>Sky</h2>
+
+<p>Second on my TV list. When I’m talking with people and they say I should watch a show, I can look it up and record with a few clicks.</p>
+
+<h2>Wikipedia</h2>
+
+<p>Imagine a world without Wikipedia? You can’t! This app is great for formatting the pages so you can read them easily on your handset.</p>
+
+<h2>BaconReader</h2>
+
+<p>Do you use Reddit? This is my Reddit client.</p>
+
+<h2>Dropbox</h2>
+
+<p>I would be lost without Dropbox. I keep my files here so that I can access them remotely and on the move. The application allows me to upload my pictures automatically so they appear on my home digital photo frames.</p>
+
+<h2>Google Authenticator</h2>
+
+<p>If you use Gmail you should enable the two factor authentication. This is the perfect app for you, as it will generate your login codes. The extra layer of security is great for added peace of mind.</p>
+
+<h2>JuiceDefender</h2>
+
+<p>Sometimes doing more with your phone makes your battery last less. This is my chosen application to save as much battery power as possible and reduce the need for extra charges through the day.</p>
+
+<p>So that’s my list of apps I cannot live without. There are more I use regularly, but these are my chosen ones to share.</p>
+
+<p>What’s your top app?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Application Development]]></title>
+    <link href="http://PartTimeLegend.github.com/android-application-development/"/>
+    <updated>2012-09-17T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/android-application-development</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>So it looks like I’m a little late to the party. I have been a fan of <a href="http://code.google.com/android/" title="Android">Android</a> for a few years now, I am currently using a <a href="http://www.htc.com/www/product/desirehd/overview.html" title="HTC Desire HD">HTC Desire HD</a> which is rooted and running a custom build of <a href="http://en.wikipedia.org/wiki/Android_version_history" title="Android version history">Ice Cream Sandwich</a> with <a href="http://en.wikipedia.org/wiki/HTC_Sense" title="HTC Sense">HTC Sense</a> 3.6 as I’m not a huge fan of HTC Sense 4.0.</p>
+
+<p>I have apps I can’t like without. I will write a post on my most favorite apps at a future date. This post is about my experiences with creating my first few Android applications.</p>
+
+<p>There are several different <a href="http://en.wikipedia.org/wiki/Integrated_development_environment" title="Integrated development environment">IDEs</a> available for <a href="http://developer.android.com/resources/dashboard/platform-versions.html" title="Android Developers">Android developers</a>. The ones I have been using using to test are:</p>
+
+<ul>
+<li>Eclipse</li>
+<li><a href="http://www.jetbrains.com/idea/" title="IntelliJ IDEA">IntelliJ IDEA</a> Community Edition</li>
+<li><a href="http://maps.google.com/maps?ll=42.35982,-71.09211&amp;spn=0.01,0.01&amp;q=42.35982,-71.09211" title="Massachusetts Institute of Technology">MIT</a> <a href="http://appinventor.googlelabs.com/about/" title="App Inventor">App Inventor</a></li>
+</ul>
+
+
+<p>I must admit that for my first few attempts at creating something simple. I went with with the MIT App Inventor. It’s a simple to use <a href="http://en.wikipedia.org/wiki/Web_application" title="Web application">Web Application</a> with the nice <a href="http://en.wikipedia.org/wiki/Graphical_user_interface" title="Graphical user interface">GUI</a> you expect from the likes of <a href="http://www.microsoft.com/visualstudio/en-us" title="Microsoft Visual Studio">Microsoft Visual Studio</a> which I am used to.</p>
+
+<p>I started off with the standard vanity applications and created a simple business card application for myself and my <a href="http://www.antonybailey.net">IT Consultancy</a> work.</p>
+
+<p>On the back of this I got asked to write a similar application for my friend who runs <a href="http://www.aranfielder.com">Aran Fielder Subtitles Ltd</a> which you can download from <a href="http://www.antonybailey.net/app/android/AranFielder.apk">here</a>.</p>
+
+<p>The MIT Application Inventor is so very easy to use. Instead of you requiring any real Java knowledge, you instead develop with a complete GUI. You drag and drop elements to the screen and then launch the Blocks Editor, which allows you to create logic to run on your events.</p>
+
+<p>I have created a simple application for launching this blog which you can download <a href="http://www.antonybailey.net/app/android/PartTimeLegend.apk">here</a>. This was written by creating a new application and then adding an Activity Starter.</p>
+
+<p>The action for the activity launcher is “android.intent.action.VIEW”.</p>
+
+<p>Now in the blocks editor I select Screen1 and the initialize method. On this I attach the Activity Starter and I set the DataUri to a text option with my link. I then attach the StarActivity to tell the application to action the request. Finally adding the close application to end the app and free up memory as all it does it launch your web browser and load a link.</p>
+
+<p>I have since created multiple small apps with more in depth logic involved. However this is to show as an example of what you can do.</p>
+
+<p>So you have now written your app and you want to make it available to the world. This is the tough part.</p>
+
+<p>You see if you want to list your app on Google Play you have to pay the registration fee of $25. While this is a small amount to pay, if you are creating free applications without the inclusion of ads because you are a jolly nice person then it’s a high cost.</p>
+
+<p>There is also the option to list your application on <a href="http://SlideME.org" title="SlideME">SlideMe</a> which is free of charge, but without the same exposure.</p>
+
+<p>For now I am going to self host my applications on my own server, and see if there is much interest. If I do decide to start listing applications on Google Play, I will only ever provide them free of charge and if I require revenue generation I will include advertisements. I don’t agree with the freemium business model. I would rather have the full feature client with apps that have a half restricted with nag screen.</p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Monetise your blog]]></title>
+    <link href="http://PartTimeLegend.github.com/monetise-your-blog/"/>
+    <updated>2012-08-28T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/monetise-your-blog</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>So we all know that hosting isn’t free and if you are adding quality content then people will visit your site. The increased traffic brings increased cost. I have been looking for several ways to increase my earning revenue without having intrusive advertising (though most people just block adds).</p>
+
+<h2>Know Your Enemy</h2>
+
+<p>Most people will block ads, the most common of these is using <a href="https://adblockplus.org/" title="Adblock Plus">Adblock Plus</a>. While this looks for known entries in a series of sources, you can get around this by hosting the ads on your own server as most people will not bother adding custom entries.</p>
+
+<p>You can also create a piece of <a href="http://en.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a> that will look for when the div that contains your advertisement is nulled and display a message asking people not to block your ads. This is unlikely to really work. A more extreme approach is to completely block people from accessing your site if they block ads.</p>
+
+<p>Now let’s talk about adding advertisements to your site.</p>
+
+<h2>Google <a href="http://www.google.com/adsense" title="AdSense">Adsense</a></h2>
+
+<p>Adsense is probably the widest used advertisement platform. It is used of most of the sites I have seen showing ads. It will give you great content based ads on your site. Unfortunately there are a few limitations of the scheme.</p>
+
+<p>They do not allow you to click your own ads. Whilst this seems an obvious one, you would be surprised how you can slip a click of the mouse, especially when an add catches your eye.</p>
+
+<p>The click prices can be quite low, this means that if your site doesn’t have a large amount of traffic reaching the $100 minimum can take a while.</p>
+
+<h2>Adf.ly</h2>
+
+<p><a href="http://adf.ly/?id=2366266">Adf.ly</a> is a service I have started using. It means that all those external links that you have on your blog go via their ad service. This means that you can post links without worrying about a loss in revenue. Whilst this can be a little intrusive for your readers, it is the only real way to monetise your external links and that’s why I use it.</p>
+
+<h2>Referral Schemes</h2>
+
+<p>This is the best way to make money from your blog. They are not <a href="http://en.wikipedia.org/wiki/Pay_per_click" title="Pay per click">pay per click</a> advertisements, they are actual products and you only get paid when someone buys the product.</p>
+
+<p>While the <a href="http://en.wikipedia.org/wiki/Clickthrough_rate" title="Clickthrough rate">click through</a> rates will be much lower, the earning potential will be quite significantly higher from these schemes. I myself have signed up with a few over the years and have altered them depending on my need and availability.</p>
+
+<p> </p>
+
+<p>These are my 3 ways of monetising my blog. You could have others, and I would be happy for you to share them with me. If the ads on my site are to your dissatisfaction, please feel free to block them.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SQL Relay 2012]]></title>
+    <link href="http://PartTimeLegend.github.com/sql-relay-2012/"/>
+    <updated>2012-05-23T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/sql-relay-2012</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>Yesterday, I attended <a href="http://www.iso.org/iso/catalogue_detail.htm?csnumber=45498" title="SQL">SQL</a> Relay 2012. A conference run by the wonderful people at SQL Server FAQ.</p>
+
+<p>I took this oportunity to see an old colleague from a previous job, someone I haven’t seen for a few years now.</p>
+
+<p>We arrived in the morning, and were presented with our goody bags (loads of marketing leaflets, nothing special) and told to go upstairs for breakfast! I was thinking “Breakfast? This ought to be good” in my sarcastic inner monologue. Well we went upstairs to be given a cup of tea and a bacon roll. This was a great start.</p>
+
+<p>Then on to the talks.</p>
+
+<p> </p>
+
+<p>After the general housekeeping announcements, it was on to the first speaker:</p>
+
+<p><strong>Morris Novello</strong></p>
+
+<p>With a strange mix of Italian and English to his accent, at first I was a little unsure of what he was saying (sorry, Morris). I soon acclimatised as he started talking his through the features. His was the first talk, so it would always be hard to get everyone enthused first thing.</p>
+
+<p><strong>Andrew Fryer</strong></p>
+
+<p>A man who some may argue is a little too excited about SQL Server. He promised us no powerpoint, and instead turned a camera onto a sheet of paper which he decided to draw the topics we discussed on.</p>
+
+<p>He had several virtual machines, that he constantly flipped through whilst he exclaimed the virtues of SQL 2012.</p>
+
+<p><strong>Jamie Thompson</strong></p>
+
+<p>This was the part I was there for. I’ll be honest, I still think <a href="http://en.wikipedia.org/wiki/SQL_Server_Integration_Services" title="SQL Server Integration Services">SSIS</a> is the greatest thing <a href="http://maps.google.com/maps?ll=47.6395972222,-122.12845&amp;spn=0.01,0.01&amp;q=47.6395972222,-122.12845" title="Microsoft">Microsoft</a> has done in a long time. I loved every second of it. I sat there just thinking of the possibilities.</p>
+
+<p><strong>Tony Rogerson</strong></p>
+
+<p>Now Tony is a greatly respected man, however he starts talking about how <a href="http://en.wikipedia.org/wiki/Solid-state_drive" title="Solid-state drive">SSD</a> is faster than standard drives. I knew this. We all knew this. I started to drift off, sorry.</p>
+
+<p><strong>Chris Testa O’neil</strong></p>
+
+<p>The last talk I stayed for. This was about the idea of AlwaysON. I think this was better suited to someone who didn’t have a cloud provider in place. I’ve got to admit <a href="http://www.microsoft.com/windowsazure/" title="Microsoft Azure">Azure</a>, doesn’t really appeal to me.</p>
+]]></content>
+  </entry>
+  
+</feed>

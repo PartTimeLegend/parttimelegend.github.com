@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: raspberrypi, | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/raspberrypi/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I built a PGP Key Server on my Raspberry Pi]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/16/i-built-a-pgp-key-server-on-my-raspberry-pi/"/>
+    <updated>2013-04-16T06:46:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/16/i-built-a-pgp-key-server-on-my-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I have a <a href="http://www.raspberrypi.org/">Raspberry Pi</a> which I like to toy with. I have another one that runs <a href="http://www.raspbmc.com/">Rasbmc</a>, but that's just for watching movies on.</p>
+
+<p>Well I was updating my public key records for PGP/GPG and it occured to me that I should be able to run a small key server myself.</p>
+
+<p>I have <a href="http://www.raspbian.org/">Raspbian</a> on my Pi which is a <a href="http://debian.org">Debian</a> based distro. Therefore it has the vast majority of the repositories that standard Debian has available to it.</p>
+
+<p>First think I did was setup <a href="http://www.no-ip.org">no-ip</a> because my ISP doesn't provide static IPs to residential customers.</p>
+
+<p>So from my laptop I start with these commands:</p>
+
+<p><code>
+ssh pi@x.x.x.x
+</code></p>
+
+<p>Replace <code>x.x.x.x</code> with your Pi's IP. Provide the password to login default is <code>raspberry</code>.</p>
+
+<p>Now download and install No-IP.</p>
+
+<p><code>
+wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+make install
+</code></p>
+
+<p>You will be prompted to put the login details for your account at No-IP. You will be asked how often to update, I sugest 360 which is 1 hour.</p>
+
+<p>Now we need to set No-IP to run at boot.</p>
+
+<p><code>
+sudo nano /etc/rc.local
+</code></p>
+
+<p>Simply add the following line and close and save.</p>
+
+<p><code>
+/usr/local/bin/noip2
+</code></p>
+
+<p>Now we have a host we can use and we are ready for the main event.</p>
+
+<p>As SKS is in your base repositories you can use.</p>
+
+<p><code>
+apt-get install sks
+</code></p>
+
+<p>Now build the database.</p>
+
+<p><code>
+sks build
+</code></p>
+
+<p>Now you need to get SKS to run at boot also.</p>
+
+<p><code>
+sudo nano /etc/default/sks
+</code></p>
+
+<p>Find the line.</p>
+
+<p><code>
+initstart=no
+</code></p>
+
+<p>Change it to.</p>
+
+<p><code>
+initstart=yes
+</code></p>
+
+<p>There you go. You have now got an SKS server running on your machine.</p>
+
+<p>If you are looking for the web front end, then you can use the files from <a href="https://syslog.tv">syslog.tv</a>.</p>
+
+<p>Create your directory.</p>
+
+<p><code>
+sudo mkdir -p /var/lib/sks/www/
+</code></p>
+
+<p>Now copy the index file to it.</p>
+
+<p><code>
+wget http://syslog.tv/downloads/sks-index.html -O /var/lib/sks/www/index.html --no-check-certificate
+</code></p>
+
+<p>There you go. All setup and running.</p>
+
+<p>You can sometimes access my key server <a href="http://antonybailey.no-ip.org:11371/">here</a>. Though I will probably give up and do something else in a week.</p>
+]]></content>
+  </entry>
+  
+</feed>

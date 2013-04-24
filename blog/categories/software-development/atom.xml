@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software Development | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/software-development/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android Application Development]]></title>
+    <link href="http://PartTimeLegend.github.com/android-application-development/"/>
+    <updated>2012-09-17T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/android-application-development</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>So it looks like I’m a little late to the party. I have been a fan of <a href="http://code.google.com/android/" title="Android">Android</a> for a few years now, I am currently using a <a href="http://www.htc.com/www/product/desirehd/overview.html" title="HTC Desire HD">HTC Desire HD</a> which is rooted and running a custom build of <a href="http://en.wikipedia.org/wiki/Android_version_history" title="Android version history">Ice Cream Sandwich</a> with <a href="http://en.wikipedia.org/wiki/HTC_Sense" title="HTC Sense">HTC Sense</a> 3.6 as I’m not a huge fan of HTC Sense 4.0.</p>
+
+<p>I have apps I can’t like without. I will write a post on my most favorite apps at a future date. This post is about my experiences with creating my first few Android applications.</p>
+
+<p>There are several different <a href="http://en.wikipedia.org/wiki/Integrated_development_environment" title="Integrated development environment">IDEs</a> available for <a href="http://developer.android.com/resources/dashboard/platform-versions.html" title="Android Developers">Android developers</a>. The ones I have been using using to test are:</p>
+
+<ul>
+<li>Eclipse</li>
+<li><a href="http://www.jetbrains.com/idea/" title="IntelliJ IDEA">IntelliJ IDEA</a> Community Edition</li>
+<li><a href="http://maps.google.com/maps?ll=42.35982,-71.09211&amp;spn=0.01,0.01&amp;q=42.35982,-71.09211" title="Massachusetts Institute of Technology">MIT</a> <a href="http://appinventor.googlelabs.com/about/" title="App Inventor">App Inventor</a></li>
+</ul>
+
+
+<p>I must admit that for my first few attempts at creating something simple. I went with with the MIT App Inventor. It’s a simple to use <a href="http://en.wikipedia.org/wiki/Web_application" title="Web application">Web Application</a> with the nice <a href="http://en.wikipedia.org/wiki/Graphical_user_interface" title="Graphical user interface">GUI</a> you expect from the likes of <a href="http://www.microsoft.com/visualstudio/en-us" title="Microsoft Visual Studio">Microsoft Visual Studio</a> which I am used to.</p>
+
+<p>I started off with the standard vanity applications and created a simple business card application for myself and my <a href="http://www.antonybailey.net">IT Consultancy</a> work.</p>
+
+<p>On the back of this I got asked to write a similar application for my friend who runs <a href="http://www.aranfielder.com">Aran Fielder Subtitles Ltd</a> which you can download from <a href="http://www.antonybailey.net/app/android/AranFielder.apk">here</a>.</p>
+
+<p>The MIT Application Inventor is so very easy to use. Instead of you requiring any real Java knowledge, you instead develop with a complete GUI. You drag and drop elements to the screen and then launch the Blocks Editor, which allows you to create logic to run on your events.</p>
+
+<p>I have created a simple application for launching this blog which you can download <a href="http://www.antonybailey.net/app/android/PartTimeLegend.apk">here</a>. This was written by creating a new application and then adding an Activity Starter.</p>
+
+<p>The action for the activity launcher is “android.intent.action.VIEW”.</p>
+
+<p>Now in the blocks editor I select Screen1 and the initialize method. On this I attach the Activity Starter and I set the DataUri to a text option with my link. I then attach the StarActivity to tell the application to action the request. Finally adding the close application to end the app and free up memory as all it does it launch your web browser and load a link.</p>
+
+<p>I have since created multiple small apps with more in depth logic involved. However this is to show as an example of what you can do.</p>
+
+<p>So you have now written your app and you want to make it available to the world. This is the tough part.</p>
+
+<p>You see if you want to list your app on Google Play you have to pay the registration fee of $25. While this is a small amount to pay, if you are creating free applications without the inclusion of ads because you are a jolly nice person then it’s a high cost.</p>
+
+<p>There is also the option to list your application on <a href="http://SlideME.org" title="SlideME">SlideMe</a> which is free of charge, but without the same exposure.</p>
+
+<p>For now I am going to self host my applications on my own server, and see if there is much interest. If I do decide to start listing applications on Google Play, I will only ever provide them free of charge and if I require revenue generation I will include advertisements. I don’t agree with the freemium business model. I would rather have the full feature client with apps that have a half restricted with nag screen.</p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What language is best for your new development?]]></title>
+    <link href="http://PartTimeLegend.github.com/what-language-is-best-for-your-new-development/"/>
+    <updated>2012-03-15T00:00:00+00:00</updated>
+    <id>http://PartTimeLegend.github.com/what-language-is-best-for-your-new-development</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>Having been developing software for as long as I can recall, this is a question that people often ask me.</p>
+
+<p>As I’m currently looking for a new job, this is a time where I can asses the changes in development over the years and how I think people should go forward with the <a href="http://en.wikipedia.org/wiki/Software_development_process" title="Software development process">development life cycle</a> and anything you might want to consider.</p>
+
+<p>I’m not the greatest software developer in the world, I will be the first to admit this. I’ve been developing for about 14 years, and I have made mistakes and I will again. I just think I’ve made enough mistakes to have an idea of what I’m doing going forward.</p>
+
+<p>So you’re now wondering about the language to choose.</p>
+
+<p>You need to consider the following when choosing your <a href="http://en.wikipedia.org/wiki/Programming_language" title="Programming language">programming language</a>:</p>
+
+<ul>
+<li>Current skill set</li>
+<li>Platform</li>
+<li>User Experience</li>
+<li>Ability to maintain</li>
+<li>Support of the language</li>
+<li>Storage available</li>
+<li>So many others</li>
+</ul>
+
+
+<p>So you know a programming language? Well done! That’s the first step. However remember just because you know a language, doesn’t mean it’s the best for the situation. I know how to write Java, I don’t think I’ll use it for my blog.</p>
+
+<p>You have a <a href="http://www.microsoft.com/WINDOWS" title="Windows">Windows</a> Server / Linux? This is a big thing, as you can use <a href="http://msdn.microsoft.com/netframework" title=".NET Framework">.NET</a> on a Windows server and not on Linux (ignore Mono, it’s horrible). You want to create a website? Then you are looking at the ASP.NET / <a href="http://www.php.net" title="PHP">PHP</a> choice most of the time. While both will work on a Windows Server. Only PHP can be run on the <a href="http://en.wikipedia.org/wiki/Linux" title="Linux">Linux box</a>.</p>
+
+<p>Are you planning to use <a href="http://www.iis.net/" title="Internet Information Services">IIS</a>? Apache? Something else? Remember IIS is only on Windows.</p>
+
+<p>Obviously if you’re writing a form based application, the language choices are different again and it this case I might very well use Java for both sides.</p>
+
+<p>User Experience is a very important part of the development of a new software package. Unfortunately a lot of developers don’t see this as an important enough thing and many packages are technically perfect, but are unusable by the client. There are simple things to check this, like looking for too many clicks, loading new pages to show information that can be presented easily on one. I’ve used systems that have text boxes that can’t be edited and have to go through other screens to implement changes.</p>
+
+<p>I’ve been a Windows Developer for a while now, not that I don’t dabble in others (this webserver is Linux). I see legacy packages written in VB6 and new packages in <a href="http://msdn2.microsoft.com/en-us/vcsharp/aa336809.aspx" title="C Sharp (programming language)">C#.NET</a> and they show. The C# layout looks much more modern, the rounded edges that you expect in Windows 7.</p>
+
+<p>The ability to support a language is crucial. Remember any large package is going to need more than one developer. Can you recruit these easily and within your budget? Look at job sites and see about availability.</p>
+
+<p>Is the language nearing end of life? Don’t bother with a language with a short life left. Unless it’s completely unavoidable due to other platform constraints.</p>
+
+<p>Storage, could be the <a href="http://en.wikipedia.org/wiki/File_size" title="File size">Database size</a> or the size of the files? Some databases are in the terabyte range that you can’t keep up. Sometimes you are limited on disk space, and in others by limitations of the language. <a href="http://en.wikipedia.org/wiki/SQL_Server_Express" title="SQL Server Express">SQL Server Express</a> has a limit on database size that you can very easily reach.</p>
+
+<p> </p>
+
+<p>So I could go on and on about the concerns of programming language choice and you can’t learn them all.</p>
+
+<p>The languages I would recommend you learning or using are only a suggestion and you should asses the needs of your development. They are:</p>
+
+<ul>
+<li>C#</li>
+<li>ASP.NET</li>
+<li>PHP</li>
+<li>Microsoft SQL Server</li>
+<li>Java</li>
+<li>JavaScript</li>
+<li>HTML</li>
+<li>CSS</li>
+<li>jQuery</li>
+<li>ASM (Yes, ASM it’s great)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: technology, | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/technology/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bitcoin Price Crash and Suicides]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/12/bitcoin-price-crash-and-suicides/"/>
+    <updated>2013-04-12T06:27:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/12/bitcoin-price-crash-and-suicides</id>
+    <content type="html"><![CDATA[<p>So I have seen a lot in the last day or so about the bubble popping.</p>
+
+<p>After unceremoniously <a href="http://www.reddit.com/r/Bitcoin/comments/1c2r87/im_sorry_but_i_can_take_no_more/">rage quitting</a> <a href="http://www.reddit.com/r/bitcoin">/r/bitcoin</a> after it became more like <a href="http://www.reddit.com/r/circlejerk">/r/circlejerk</a> I was not aware of Today's pointless posts.</p>
+
+<p>I was on IRC and I was told about <a href="http://www.reddit.com/r/Bitcoin/comments/1c51ck/i_think_this_subreddit_should_seriously_consider/">this post</a> and I had to read twice to see if anyone was actually serious.</p>
+
+<blockquote><h3>I think this subreddit should seriously consider having suicide hotline info posted.</h3>
+
+<p>Im not joking. This is not a troll. We know there have been countless pie in the sky "investors" in BTC over the past couple of days. Shit Ive read more than one comment about how we've got college kids taking STUDENT LOANS to buy bitcoin when it was at 150+. There is no way more than one person wont kill themselves over this. Might as well make the info known to maybe save a life or two.
+I know this will get downvoted into oblivion by the bitcoin religious nuts who think this currency will change the world - because they fear it will only make BTC look bad or make it lose value - tough shit.</p></blockquote>
+
+<p>I was amazed to see how many people had invested more money than they could lose into Bitcoin. I have personally not bought a single coin, nor have I sold one. My current holdings are not tiny and not large.</p>
+
+<p>It just shocks me when people see a highly unstable commodity (Is Bitcoin a currency or a commodity?) and they truly believe the price can only go up. Do we forget about every single economic crash is history?</p>
+
+<p>I'm sure we will see a few news articles over the coming days. Let's see how much people have lost.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Travis CI and how I both love and hate you]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/05/travis-ci-and-how-i-both-love-and-hate-you/"/>
+    <updated>2013-04-05T20:50:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/05/travis-ci-and-how-i-both-love-and-hate-you</id>
+    <content type="html"><![CDATA[<p>After recently rediscovering my love of <a href="http://www.github.com/parttimelegend">Github</a> I was interested to see some of the additional functionality.</p>
+
+<p>You see I have long had a background of developing Open Source software. I haven't in recent years as I have had more interest in making money rather than making the world a better place. Well now I feel I have skills to offer the Open Source community as well as learning new skills.</p>
+
+<p>I love the idea of Continuos Integration and I wished it was easier to support and implement. I develop in several languages, and I have recently decided to learn Ruby as a something to do project.</p>
+
+<p>I had seen systems such as <a href="http://jenkins-ci.org/">Jenkins CI</a>, but the fact that I needed an additional server of my own to use it limited me from real useage for real time CI.</p>
+
+<p>I then came to find <a href="https://travis-ci.org/">Travis CI</a>! It seemed simple enough to setup, just sign in and activate for your project.</p>
+
+<p>Then came the hard part, the <code>.travis.yml</code> file! Oh I understand the need for it, don't get me wrong. I just wish it was easier to figure out the real options.</p>
+
+<p><code>
+language: ruby
+rvm:
+  - 1.9.3
+  - jruby-18mode # JRuby in 1.8 mode
+  - jruby-19mode # JRuby in 1.9 mode
+  - rbx-18mode
+  - rbx-19mode
+  - 1.8.7
+</code></p>
+
+<p>Well that looks simple enough. Let's go! Oh wait, it's more than that.</p>
+
+<p>Well it decides it will run <code>bundle install</code> which is fine by me, then it runs 'rake install'. Wait a second! I'm not using rake! So it fails as I have no <code>Rakefile</code>. Surey there is a way around this. There is!</p>
+
+<p><code>
+script: bundle install
+</code></p>
+
+<p>Now let's move on to the way that Travis decides to email you constantly about the status of a build. I don't like email. I really want a replacement for email, but what?</p>
+
+<p>First let's disable the email alerts.</p>
+
+<p>```
+notifications:
+  email:</p>
+
+<pre><code>on_success: never
+on_failure: never
+</code></pre>
+
+<p>```</p>
+
+<p>That's better already, but I'm going to need you to alert me somehow. Preferably something I can automate. Let's look back at one of the oldest uses of the internet IRC. I have an issue with IRC as it is always idle people or people trying to get into <a href="http://bash.org">QDB</a>. However for alerts it's perfect!</p>
+
+<p><code>
+notifications:
+  irc: "rowling.freenode.net#parttimelegend"
+</code></p>
+
+<p>I can then have an application monitor and investigate failures. I can even set it to fix common ones if I wish.</p>
+
+<p>Then Travis is perfect! Well almost. The last fix for me is branches.
+If you're like me, then some of your branches are broken. This is because they are development branches and I check code in a lot.
+So we want to tell Travis not to read certain branches, or more simply only to check certain branches.</p>
+
+<p>```
+branches:
+  only:</p>
+
+<pre><code>- master
+</code></pre>
+
+<p>```</p>
+
+<p>This tells Travis to only check the master branch. I'm going to assume this always builds, or at least it should. My only complaint is that master is checked first so can't be excluded simply.
+Such as in the case of <a href="https://github.com/PartTimeLegend/parttimelegend.github.com">this blog</a>. In this case the master branch is not code, but the source branch is.
+I've not found a fix for this yet though. :(</p>
+]]></content>
+  </entry>
+  
+</feed>

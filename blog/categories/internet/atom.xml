@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Internet | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/internet/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Easily Remove All Malware from your Windows PC]]></title>
+    <link href="http://PartTimeLegend.github.com/easily-remove-malware-windows-pc/"/>
+    <updated>2012-11-07T00:00:00+00:00</updated>
+    <id>http://PartTimeLegend.github.com/easily-remove-malware-windows-pc</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>One of the most common issues that people come to me for help with is the removal of <a href="http://en.wikipedia.org/wiki/Malware" title="Malware">malware</a> from their computers.</p>
+
+<p>English: I constructed this image using :image:Computer n screen.svg and :image:Toxic.png. (Photo credit: Wikipedia)</p>
+
+<p>The number of times this occurs has increased dramatically in the last few years, well I’ve decided to write-up a quick guide on how to remove the malware you have got.</p>
+
+<p>There are so many tools and programs on the internet that offer to remove malware from your computer, some are free and some are expensive. There is only one program you need to remove malware and it’s free!</p>
+
+<p><a href="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH"><img src="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH" alt=" Easily Remove All Malware from your Windows PC" /></a></p>
+
+<p> </p>
+
+<p>So now you have downloaded the only tool you need. Let’s begin removing your malware. If you are reading this post and looking to remove malware from your PC I would recommend printing it or loading it up on your tablet. Unless you have a great memory.</p>
+
+<h2>Step 1</h2>
+
+<p>Download and install <a href="http://www.tkqlhce.com/pf65wktqks7ECBHAD979999C8DH">Malwarebytes Antimalware</a>.</p>
+
+<h2>Step 2</h2>
+
+<p>Reboot your computer into <a href="http://en.wikipedia.org/wiki/Safe_mode" title="Safe mode">Safe Mode</a>. You can do this by powering your computer down and pressing F8 during boot (Shift F8 / F20 in <a href="http://blogs.msdn.com/b/b8/" title="Windows 8">Windows 8</a>).</p>
+
+<h2>Step 3</h2>
+
+<p>Launch Malwarebytes Antimalware and let it update.</p>
+
+<h2>Step 4</h2>
+
+<p>Run a full scan.</p>
+
+<h2>Step 5</h2>
+
+<p>Remove infections.</p>
+
+<h2>Step 6</h2>
+
+<p>Reboot in Safe Mode.</p>
+
+<h2>Step 7</h2>
+
+<p>Repeat from Step 4.</p>
+
+<h2>Step 8</h2>
+
+<p>Reboot as normal.</p>
+
+<h2>Step 9</h2>
+
+<p>Run another full scan to be sure.</p>
+
+<p>There you go. All fixed.</p>
+
+<p>Editorial Note: The links to Malwarebytes are via an advertising provider and I earn a referral fee. I fully support Malwarebytes, and so you can also download direct from their website: http://www.malwarebytes.org/</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Bitcoin The Easy Way]]></title>
+    <link href="http://PartTimeLegend.github.com/getting-bitcoin-the-easy-way/"/>
+    <updated>2012-10-11T00:00:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/getting-bitcoin-the-easy-way</id>
+    <content type="html"><![CDATA[<h1></h1>
+
+<p>So chances are that you are already aware of Bitcoin. If not, you should go read about it.</p>
+
+<p>There are several ways to generate coin, these are either through purchasing coin, referral systems and mining.</p>
+
+<h2>Mining</h2>
+
+<p>Back in the early days of Bitcoin, you could easily mine for currency. These days it’s not so simple as the chains get more complicated. Did you know? You’re mining coin right now! One of the revenue earning services of this site is Bitcoinplus which is operating on this site right now. The spare CPU cycles of your machine are being used to help fund the content you are reading.</p>
+
+<p>While mining will still work, it is likely not very cost effective. The power used to mine compared with the returns you get are drastically outweighed. There are people who build mining rigs, however I find that having distributed machines all running a small amount during their normal operation works just as well.</p>
+
+<h2>Referrals</h2>
+
+<p>There is not much to be gained via referrals for Bitcoin in my experience. The only reliable sites I’ve found to date have been Bitvisitor which pays you to visit a site for 5 minutes. The problem is that there is only a few sites available</p>
+
+<p>for viewing and you quickly get bored. <a href="http://www.iwantfreebitcoins.com/20673">I Want Free Bit Coins</a> which allows you to complete offers to earn bitcoin. It seems a bit spammy, but I’ve been paid by them.</p>
+
+<h2>Purchase</h2>
+
+<p>Now for the extreme need to get bitcoin in a hurry, you can buy it from various online markets. I won’t name any, but you can google to find them pretty easily.</p>
+
+<p>Remember if you are selling bitcoin, that it is completely anonymous and without the control of a chargeback so be sure you trust the buyer.</p>
+
+<p>I have been using Bitcoin for about 2 years now, and find it rather useful for retaining value.</p>
+
+<p>Oh and feel free to send me some free bitcoin: 13BrFJVFX6ao7LtzqR92vgYeMBC3va6pe8</p>
+]]></content>
+  </entry>
+  
+</feed>

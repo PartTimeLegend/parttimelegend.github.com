@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: backups, | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/backups/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Old backups and phpBB]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/09/old-backups-and-phpbb/"/>
+    <updated>2013-04-09T01:04:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/09/old-backups-and-phpbb</id>
+    <content type="html"><![CDATA[<p>So I was doing some <em>spring</em> cleaning and I came accross a CD that had come with me when I moved. It wasn't labelled so I decided to check it out.</p>
+
+<p>It had a load of files related to back when I used to develop hacks/MODs for <a href="http://www.phpbb.com">phpBB</a>.</p>
+
+<p>I've no idea where else on the internet you might find them, so I decided to deploy them to some new repositories on <a href="http://www.github.com">Github</a>.</p>
+
+<h2>phpBB and I</h2>
+
+<p>I left the phpBB community about 10 years ago. I have my reasons, and I will not go into further discussion on the matter. This code will not be maintained or supported. If you want it, have it. If you fork it, I will <strong>NOT</strong>* accept pulls. Count this as a storage of old code. If any others show up I'll submit them. It's been so long since I used phpBB I doubt I even remember any of it.</p>
+]]></content>
+  </entry>
+  
+</feed>

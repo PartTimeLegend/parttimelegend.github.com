@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: raspberry | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/raspberry/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bitcoin Mining on Raspberry Pi]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/08/bitcoin-mining-on-raspberry-pi/"/>
+    <updated>2013-04-08T00:01:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/08/bitcoin-mining-on-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I put this guide together a while ago and I decided to publish my gists here. So here you go.</p>
+
+<p><div><script src='https://gist.github.com/5170990.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

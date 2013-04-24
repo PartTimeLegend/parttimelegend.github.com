@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fixes,gists | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/fixes-gists/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Virtual Box on Ubuntu : File not found fix]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/07/installing-virtual-box-on-ubuntu-file-not-found-fix/"/>
+    <updated>2013-04-07T23:53:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/07/installing-virtual-box-on-ubuntu-file-not-found-fix</id>
+    <content type="html"><![CDATA[<p>I love Linux, I always have. It just makes me feel more in control, even if I have no idea what I'm doing.</p>
+
+<p>Unfortunately every now and then I need to use Windows. Well, I don't see the need for a dual boot when I can just use <a href="https://www.virtualbox.org/">Virtual Box</a> and install the Windows XP/7/8 disks I have on a bookshelf.</p>
+
+<p>Well I recently installed <a href="http://http://www.ubuntu.com/">Ubuntu</a> on my laptop. I have used several distros over the years and I always liked <a href="http://www.debian.org/">Debian</a>. So I decided to use the fork that is meant to be easier to use (was Debian hard?).</p>
+
+<p>Anyway I digress.</p>
+
+<p><div><script src='https://gist.github.com/5328700.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

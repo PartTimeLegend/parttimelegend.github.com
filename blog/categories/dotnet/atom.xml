@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dotnet | Antony Bailey The PartTimeLegend]]></title>
+  <link href="http://PartTimeLegend.github.com/blog/categories/dotnet/atom.xml" rel="self"/>
+  <link href="http://PartTimeLegend.github.com/"/>
+  <updated>2013-04-24T22:26:42+01:00</updated>
+  <id>http://PartTimeLegend.github.com/</id>
+  <author>
+    <name><![CDATA[Antony Bailey]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Finally got Travis CI to work with C#.NET]]></title>
+    <link href="http://PartTimeLegend.github.com/blog/2013/04/11/finally-got-travis-ci-to-work-with-c-number-net/"/>
+    <updated>2013-04-11T06:06:00+01:00</updated>
+    <id>http://PartTimeLegend.github.com/blog/2013/04/11/finally-got-travis-ci-to-work-with-c-number-net</id>
+    <content type="html"><![CDATA[<p>I have been playing with <a href="http://www.travis-ci.org">Travis CI</a> for a little while as I see the amazing advantage of using CI. One of the downsides I saw was the lack of .NET development testing.</p>
+
+<p>Well I fixed that! Well, okay... sort of.</p>
+
+<p>We need to do a few things to make it work, that are a bit tough to do to start with.</p>
+
+<p>First the language. I would love to see the option for C# in the future, but for now we will just say it's C.</p>
+
+<p><code>
+language: c
+</code></p>
+
+<p>Now we need to install <a href="http://mono-project.com/Main_Page">Mono</a> which is described on their own site as:</p>
+
+<blockquote><p>"Mono is a software platform designed to allow developers to easily create cross platform applications. Sponsored by Xamarin, Mono is an open source implementation of Microsoft's .NET Framework based on the ECMA standards for C# and the Common Language Runtime. A growing family of solutions and an active and enthusiastic contributing community is helping position Mono to become the leading choice for development of Linux applications."</p></blockquote>
+
+<p>Obviously it's not as complete as Microsoft's, but it's good enough for me.</p>
+
+<p><code>
+install:
+  - sudo apt-get install mono-devel mono-gmcs
+</code></p>
+
+<p>Now we simply call xbuild and pass in the solution.</p>
+
+<p><code>
+script:
+  - xbuild PseudonoymMatching.sln
+</code></p>
+
+<p>Does it work? Check it out for yourself.</p>
+
+<p><a href="https://travis-ci.org/PartTimeLegend/PseudonymMatching"><img src="https://travis-ci.org/PartTimeLegend/PseudonymMatching.png?branch=master" alt="Build Status" /></a></p>
+]]></content>
+  </entry>
+  
+</feed>
