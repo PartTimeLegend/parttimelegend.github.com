@@ -52,7 +52,7 @@ I will retain the paper document we complete with our details on. I store these 
 
 ## I don't live in your city/country can will you still sign my key?
 
-I take these on a per request basis. Due to the nature of this, I will have to look carefully at your details and others who have signed your key. I reserve the right to charge for this service as it requires due dilligence on my part. This charge would not exceed £10 or tbe equivilent in your country and should be made via Bank Transfer to further confirm your identity. This will not result in a signature of absolute trust, you will receive a casual signature as I cannot absolutely gaurantee your identity.
+I take these on a per request basis. Due to the nature of this, I will have to look carefully at your details and others who have signed your key. I reserve the right to charge for this service as it requires due dilligence on my part. This charge would not exceed £10 or the equivilent in your country and should be made via Bank Transfer to further confirm your identity. This will not result in a signature of absolute trust, you will receive a casual signature as I cannot absolutely gaurantee your identity.
 
 ## What keys have you signed and have signed you?
 
