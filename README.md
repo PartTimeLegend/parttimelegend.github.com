@@ -1,0 +1,2 @@
+# parttimelegend.github.comold
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8f199bbfea624adfa94f91b982e60e18)](https://www.codacy.com/app/PartTimeLegend/parttimelegend-github-comold?utm_source=github.com&utm_medium=referral&utm_content=PartTimeLegend/parttimelegend.github.comold&utm_campaign=badger)
